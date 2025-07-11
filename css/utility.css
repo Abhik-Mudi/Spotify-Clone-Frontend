@@ -1,0 +1,40 @@
+.red-border{
+    border: 2px solid red;
+    /* margin: 2px; */
+}
+
+.flex{
+    display: flex;
+}
+
+.justify-items{
+    justify-content: center;
+}
+
+.align-items{
+    align-items: center;
+}
+
+.invert{
+    filter: invert(1);
+}
+
+.image{
+    height: 34px;
+    width: 15px;
+}
+
+img{
+    width: 34px;
+    height: 34px;
+}
+
+button{
+    cursor: pointer;
+    font-weight: 700;
+    border: 1px;
+}
+
+.hidden{
+    display: none;
+}
