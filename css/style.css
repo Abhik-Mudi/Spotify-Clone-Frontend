@@ -269,7 +269,7 @@ h4{
 .playlist{
     display: flex;
     justify-content: space-between;
-    height: 17%;
+    height: 17%; 
 }
 
 .images{
@@ -309,6 +309,7 @@ h4{
     flex-wrap: wrap;
     gap: 10px;
     overflow-y: scroll;
+    cursor: pointer;
 }
 .trending::-webkit-scrollbar{
     display: none;
