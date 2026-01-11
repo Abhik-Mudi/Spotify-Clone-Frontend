@@ -31,19 +31,20 @@ function renderPlaylists(){
 
 async function displayAlbums() {
     // fetching the albums inside songs
-    let a = await fetch(`http://127.0.0.1:3000/songs/`)
+    let a = await fetch('http://localhost:3000/songs')
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response
     let anchors = div.getElementsByTagName("a")
     let cardContainer = document.querySelector(".trending");
     let array = Array.from(anchors)
-    for (let index = 0; index < array.length-1; index++) {
+    for (let index = 1; index < array.length-1; index++) {
         const element = array[index];
-        if (element.href.includes("/songs")) {
-            let folder = element.href.split("/").slice(-2)[0]
+        let cleanHref = decodeURIComponent(element.href).replace(/\\/g, "/");
+        if (cleanHref.includes("/songs")) {
+            let folder = cleanHref.split("/").slice(-2)[0]
             // fetching the metadata of folder
-            let a = await fetch(`http://127.0.0.1:3000/songs/${folder}/info.json`)
+            let a = await fetch(`http://localhost:3000/songs/${folder}/info.json`)
             let response = await a.json();
             cardContainer.innerHTML+=`<div data-folder="${folder}" class="card">
                         <div class="play">
@@ -61,7 +62,7 @@ async function displayAlbums() {
 async function getSongs(folder) {
     // fetching the songs of specific folder
     currFolder = folder
-    let a = await fetch(`http://127.0.0.1:3000/songs/${currFolder}/`)
+    let a = await fetch(`http://localhost:3000/songs/${currFolder}/`)
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response
@@ -69,11 +70,11 @@ async function getSongs(folder) {
     songs = []
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
-        if (element.href.endsWith(".mp3")) {
-            songs.push(element.href)
+        let cleanHref = decodeURIComponent(element.href).replace(/\\/g, "/");
+        if (cleanHref.endsWith(".mp3")) {
+            songs.push(cleanHref)
         }
     }
-
     return songs
 }
 
